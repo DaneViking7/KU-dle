@@ -289,7 +289,7 @@ public class CalendarUI extends Application
 		// Start the application
 		stage.setTitle("Calendar");
 		stage.setScene(scene);
-		stage.setResizable(false);
+		stage.setResizable(true);
 		stage.show();
 
 		Time.setTwentyFourMode(false);
