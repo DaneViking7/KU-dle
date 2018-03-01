@@ -664,6 +664,8 @@ public class CalendarUI extends Application
 			return false;
 		else if(selectedDateArr[0] == 7 && selectedDateArr[1] == 4) // Independence Day
 			return false;
+		else if(currentDateLD.compareTo(selectedDateLD) > 0)
+			return false;
 		else
 			return true;
 	}
