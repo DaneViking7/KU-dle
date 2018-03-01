@@ -98,12 +98,7 @@
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
-                              </CheckBox>
-                              <CheckBox fx:id="chckShowBackground" mnemonicParsing="false" text="Show Backgrounds" GridPane.columnIndex="1">
-                                 <GridPane.margin>
-                                    <Insets left="10.0" />
-                                 </GridPane.margin>
-                              </CheckBox>
+                              </CheckBox>  
                            </children>
                         </GridPane>
                         <GridPane GridPane.rowIndex="2">
