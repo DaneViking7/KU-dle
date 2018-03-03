@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <SplitPane fx:id="paneMain" dividerPositions="0.33" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0">
          <items>
@@ -98,7 +98,8 @@
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
-                              </CheckBox>  
+                              </CheckBox>
+                              <CheckBox fx:id="chckMultiDay" mnemonicParsing="false" text="Multi-Day Event" GridPane.columnIndex="1" />  
                            </children>
                         </GridPane>
                         <GridPane GridPane.rowIndex="2">

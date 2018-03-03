@@ -9,6 +9,8 @@ import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.HashSet;
+import java.util.Set;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -28,6 +30,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -40,6 +43,12 @@ import javafx.util.Pair;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.TextArea;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableSet;
+import javafx.collections.SetChangeListener.Change;
+import javafx.geometry.Pos;
+import javafx.scene.layout.Priority;
+
 
 import com.base.data.DairyFarmerClient;
 import com.base.data.models.Event;
@@ -49,7 +58,6 @@ import com.base.main.CreateUserUI;
 
 import com.base.util.Time;
 import com.base.util.Utilities;
-
 
 
 public class CalendarUI extends Application
@@ -64,6 +72,7 @@ public class CalendarUI extends Application
 	@FXML private ImageView btnMonthLeft;
 	@FXML private ImageView btnMonthRight;
 
+	@FXML private CheckBox chckMultiDay;
 	@FXML private CheckBox chckTwentyfour;
 	@FXML private Label lblAdminDisable;
 	@FXML private Button btnCreateEvent;
@@ -189,6 +198,8 @@ public class CalendarUI extends Application
 	private String inputUsername;
 	private String inputPassword;
 	private boolean loginDetails = false;
+	
+	private final ObservableSet<Label> selectedLabels = FXCollections.observableSet();
 
 	/**
 	 * Where the application launches from
@@ -649,6 +660,20 @@ public class CalendarUI extends Application
 		{
 			Time.setTwentyFourMode(chckTwentyfour.isSelected());
 			updateLists();
+		});
+		
+		// Turns on/off multi-day events
+		chckMultiDay.setOnAction(e ->
+		{
+			//final int ROWS = 6;
+			//final int COLS = 7;
+			
+			//final Label[][] labels = new Label[COLS][ROWS];
+			
+			
+			
+			
+			
 		});
 	}
 
