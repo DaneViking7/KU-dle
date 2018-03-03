@@ -9,8 +9,7 @@ import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -43,11 +42,7 @@ import javafx.util.Pair;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.TextArea;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableSet;
-import javafx.collections.SetChangeListener.Change;
-import javafx.geometry.Pos;
-import javafx.scene.layout.Priority;
+
 
 
 import com.base.data.DairyFarmerClient;
@@ -191,6 +186,8 @@ public class CalendarUI extends Application
 	private int[] selectedDateArr = {0, 0, 0};
 	private int selDateRow = 0; // Row index of selected date
 	private int selDateDay = 0; // Day index of selected date
+	static ArrayList<Pair<Integer, Integer>> multiDayArr = new ArrayList<Pair<Integer, Integer>>();
+	
 
 	private DairyFarmerClient client = new DairyFarmerClient();
 	private User user;
@@ -198,8 +195,7 @@ public class CalendarUI extends Application
 	private String inputUsername;
 	private String inputPassword;
 	private boolean loginDetails = false;
-	
-	private final ObservableSet<Label> selectedLabels = FXCollections.observableSet();
+	static boolean multiDayMode;
 
 	/**
 	 * Where the application launches from
@@ -275,6 +271,7 @@ public class CalendarUI extends Application
 		stage.setResizable(true);
 		stage.show();
 
+		setMultiDayMode(false);
 		Time.setTwentyFourMode(false);
 		lblEventName.setWrapText(true);
 		lblEventDesc.setWrapText(true);
@@ -635,6 +632,7 @@ public class CalendarUI extends Application
 		{
 			changeMonth(false, 1);
 		});
+		
 
 		// Sets all of the boxes to change the selected date when they are clicked on
 		for(int rowCal = 0; rowCal < 6; rowCal++)
@@ -646,11 +644,24 @@ public class CalendarUI extends Application
 				final int day = dayCal;
 				calendarDateBoxes[rowCal][dayCal].setOnMouseClicked(e ->
 				{
-					changeDate(row, day);
+					if(!multiDayMode)
+					{
+						changeDate(row, day);
+					}
+					else
+					{	
+						Pair<Integer, Integer> tempPair = new Pair<>(row, day);
+						multiDayArr.add(tempPair);
+						
+						calendarDateBoxes[row][day].setFill(clrSelDate);
+					}
 				});
 				calendarDateLabels[rowCal][dayCal].setOnMouseClicked(e ->
 				{
-					changeDate(row, day);
+					if(!multiDayMode)
+					{
+						changeDate(row, day);
+					}
 				});
 			}
 		}
@@ -665,16 +676,17 @@ public class CalendarUI extends Application
 		// Turns on/off multi-day events
 		chckMultiDay.setOnAction(e ->
 		{
-			//final int ROWS = 6;
-			//final int COLS = 7;
-			
-			//final Label[][] labels = new Label[COLS][ROWS];
-			
-			
-			
-			
-			
+			setMultiDayMode(chckMultiDay.isSelected());
 		});
+	}
+	
+	/**
+	 *  sets multi-day mode to true or false: true if multi-day is enabled, false otherwise
+	 * @param multiDay, boolean
+	 */
+	private void setMultiDayMode(boolean multiDay)
+	{
+		multiDayMode = multiDay;
 	}
 
 	/**
@@ -715,6 +727,9 @@ public class CalendarUI extends Application
 	            	updateLists();
 	            	paneMain.setDisable(false);
 	            	Thread.currentThread().stop();
+	            	chckMultiDay.setSelected(false);
+	            	setMultiDayMode(false);
+	            	
 	            }
 	        }
 	    }, 0, 1, TimeUnit.SECONDS);

@@ -128,6 +128,16 @@ public class CreateEventUI
 				List<User> tempUser = new ArrayList<User>(); // Necessary for the event creation
 				tempUser.add(admin);
 				client.createEvent(txtEventName.getText(), txtEventDesc.getText(), admin.getName(), currDate, tempTime, tempUser);
+				
+				if(CalendarUI.multiDayMode)
+				{
+					for(int i = 1; i <= CalendarUI.multiDayArr.size(); i++)
+			    	{	
+			    		LocalDate tempMultiDayLD = currDate.plusDays(i);
+			    		client.createEvent(txtEventName.getText(), txtEventDesc.getText(), admin.getName(), tempMultiDayLD, tempTime, tempUser);
+			    	}
+				}
+				
 				showDialogBox("Event Created", "Event Created!", "Event \"" + txtEventName.getText() + "\" was successfully created!", AlertType.INFORMATION);
 				eventCreated = true;
 				stage.close();
