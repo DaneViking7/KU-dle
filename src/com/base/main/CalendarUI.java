@@ -197,7 +197,7 @@ public class CalendarUI extends Application
 	private String inputUsername;
 	private String inputPassword;
 	private boolean loginDetails = false;
-	static boolean multiDayMode;
+	static boolean multiDayMode = false;
 
 	/**
 	 * Where the application launches from
@@ -273,7 +273,6 @@ public class CalendarUI extends Application
 		stage.setResizable(true);
 		stage.show();
 
-		setMultiDayMode(false);
 		Time.setTwentyFourMode(false);
 		lblEventName.setWrapText(true);
 		lblEventDesc.setWrapText(true);
@@ -662,14 +661,37 @@ public class CalendarUI extends Application
 				{
 					if(!multiDayMode)
 					{
+						int tempRow = selDateRow;
+						int tempDay = selDateDay;
 						changeDate(row, day);
+						if(!canCreateEvent())
+						{
+							changeDate(tempRow, tempDay);
+							showDialogBox("Cannot Create Event", "Cannot create event on this day", "Creating events on this day is disallowed", AlertType.ERROR);
+						}
 					}
 					else
 					{	
-						Pair<Integer, Integer> tempPair = new Pair<>(row, day);
-						multiDayArr.add(tempPair);
-						
-						calendarDateBoxes[row][day].setFill(clrSelDate);
+						boolean exists = false;
+						for(int i = 0; i < multiDayArr.size(); i++)
+						{
+							if(multiDayArr.get(i).getKey() == row && multiDayArr.get(i).getValue() == day)
+								exists = true;
+						}
+						if(!exists)
+						{
+							int tempRow = selDateRow;
+							int tempDay = selDateDay;
+							Pair<Integer, Integer> tempPair = new Pair<>(row, day);
+							changeDate(row, day);
+							if(canCreateEvent())
+								multiDayArr.add(tempPair);
+							else
+							{
+								changeDate(tempRow, tempDay);
+								showDialogBox("Cannot Create Event", "Cannot create event on this day", "Creating events on this day is disallowed", AlertType.ERROR);
+							}
+						}
 					}
 				});
 				calendarDateLabels[rowCal][dayCal].setOnMouseClicked(e ->
@@ -677,6 +699,21 @@ public class CalendarUI extends Application
 					if(!multiDayMode)
 					{
 						changeDate(row, day);
+					}
+					else
+					{	
+						boolean exists = false;
+						for(int i = 0; i < multiDayArr.size(); i++)
+						{
+							if(multiDayArr.get(i).getKey() == row && multiDayArr.get(i).getValue() == day)
+								exists = true;
+						}
+						if(!exists)
+						{
+							Pair<Integer, Integer> tempPair = new Pair<>(row, day);
+							multiDayArr.add(tempPair);
+							changeDate(row, day);
+						}
 					}
 				});
 			}
@@ -702,7 +739,20 @@ public class CalendarUI extends Application
 	 */
 	private void setMultiDayMode(boolean multiDay)
 	{
-		multiDayMode = multiDay;
+		if(!multiDay)
+		{
+			multiDayMode = multiDay;
+			for(int i = 0; i < multiDayArr.size(); i++)
+			{
+				changeDate(multiDayArr.get(i).getKey(), multiDayArr.get(i).getValue());
+			}
+			changeDate(selDateRow, selDateDay);
+			multiDayArr.clear();
+		}
+		else
+		{
+			multiDayMode = multiDay;
+		}
 	}
 
 	/**
@@ -745,7 +795,7 @@ public class CalendarUI extends Application
 	            	Thread.currentThread().stop();
 	            	chckMultiDay.setSelected(false);
 	            	setMultiDayMode(false);
-	            	
+	            	multiDayArr.clear();
 	            }
 	        }
 	    }, 0, 1, TimeUnit.SECONDS);
@@ -872,6 +922,13 @@ public class CalendarUI extends Application
 					calendarDateBoxes[selDateRow][selDateDay].setFill(Color.RED);
 			}
 			calendarDateBoxes[row][day].setFill(clrSelDate);
+			if(multiDayMode)
+			{
+				for(int i = 0; i < multiDayArr.size(); i++)
+				{
+					calendarDateBoxes[multiDayArr.get(i).getKey()][multiDayArr.get(i).getValue()].setFill(clrSelDate);
+				}
+			}
 			selectedDateLD = LocalDate.of(selectedDateArr[2], selectedDateArr[0], selectedDateArr[1]); // Update selectedDateLD
 			selDateRow = row;
 			selDateDay = day;
