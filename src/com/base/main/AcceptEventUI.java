@@ -1,12 +1,12 @@
 package com.base.main;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import com.base.data.models.Event;
 import com.base.data.models.User;
 import com.base.util.Time;
-import com.base.util.Task;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,13 +24,9 @@ public class AcceptEventUI
 {
 	@FXML private ListView<Time> lstAvailableTimes;
 	@FXML private ListView<Time> lstChosenTimes;
-	@FXML private ListView<Task> lstAvailableTasks;
-	@FXML private ListView<Task> lstChosenTasks;
 
 	@FXML private Button btnAddTime;
 	@FXML private Button btnRemTime;
-	@FXML private Button btnAddTask;
-	@FXML private Button btnRemTask;
 	@FXML private Button btnApprove;
 	@FXML private Button btnCancel;
 
@@ -55,25 +51,13 @@ public class AcceptEventUI
 
 		lstAvailableTimes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); // So we can select multiple times
 		lstChosenTimes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		lstAvailableTasks.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		lstChosenTasks.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		lstAvailableTimes.getItems().addAll(eventParam.getTimes());
-		List<Task> tasks = eventParam.getTasks();
-		for(Task t : tasks)
-		{
-			if(t.getAttendee() == null)
-			{
-				lstAvailableTasks.getItems().add(t);
-			}
-		}
-		
-		
 
 		// Start the application
 		user = userParam;
 		event = eventParam;
 		Stage stage = new Stage();
-		stage.setTitle("Choose Times and Tasks");
+		stage.setTitle("Choose Times");
 		stage.setScene(scene);
 		stage.setResizable(false);
 		stage.show();
@@ -116,32 +100,6 @@ public class AcceptEventUI
             }
             lstAvailableTimes.getItems().sort((Time t1, Time t2) -> t1.getTime().compareTo(t2.getTime()));
 		});
-		
-		// Add the tasks user can manage
-		btnAddTask.setOnAction(e ->
-		{
-			ObservableList<Task> temp = lstAvailableTasks.getSelectionModel().getSelectedItems(); // See CreateEventUI.java for explanations on this - I'm too lazy to rewrite it
-			Task[] selectedTasks = temp.toArray(new Task[0]);
-
-            for(Task task : selectedTasks)
-            {
-            	lstChosenTasks.getItems().add(task);
-            	lstAvailableTasks.getItems().remove(task);
-            }
-		});
-
-		// Remove the tasks the user can't manage
-		btnRemTask.setOnAction(e ->
-		{
-			ObservableList<Task> temp = lstChosenTasks.getSelectionModel().getSelectedItems();
-			Task[] selectedTasks = temp.toArray(new Task[0]);
-
-            for(Task task : selectedTasks)
-            {
-            	lstAvailableTasks.getItems().add(task);
-            	lstChosenTasks.getItems().remove(task);
-            }
-		});
 
 		// Commit to going to the event
 		btnApprove.setOnAction(e ->
@@ -150,15 +108,42 @@ public class AcceptEventUI
 			{
 				event.addAttendee(user); // Add the attendee
 				List<Time> times = lstChosenTimes.getItems();
-				List<Task> tasks = lstChosenTasks.getItems();
 				for(Time t : times)
 				{
 					t.addAttendee(user); // Add the user to all of the times
 				}
-				for(Task t : tasks)
+				
+				if(CalendarUI.multiDayMode)
 				{
-					t.setAttendee(user);
+					for(int i = 1; i <= CalendarUI.multiDayArr.size(); i++)
+					{
+						LocalDate tempMultiDayLD = CalendarUI.selectedDateLD.plusDays(i);
+						List<Event> tempEventList = CalendarUI.client.getEvents(tempMultiDayLD);
+						
+						int index = 0;
+						for(int k = 0; k < tempEventList.size(); k++)
+						{
+							Event tempEvent = tempEventList.get(k);
+							
+							if(tempEvent.getEventName() == event.getEventName())
+							{
+								index = k;
+								break;
+							}
+						}
+						
+						Event multiEvent = tempEventList.get(index);
+						
+						multiEvent.addAttendee(user); // Add the attendee
+												
+						List<Time> multiTimes = lstChosenTimes.getItems();
+						for(Time b : multiTimes)
+						{
+							b.addAttendee(user); // Add the user to all of the times
+						}
+					} 
 				}
+				
 				showDialogBox("Approved Event", "Approved Event!", "You have committed to going to \"" + event.getEventName() + "\"!", AlertType.INFORMATION);
 				done = true;
 				stage.close();

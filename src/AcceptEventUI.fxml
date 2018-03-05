@@ -8,6 +8,8 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -18,9 +20,9 @@
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="46.0" minHeight="-Infinity" prefHeight="33.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="347.0" minHeight="-Infinity" prefHeight="335.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="50.0" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="300.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -30,47 +32,53 @@
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
               </columnConstraints>
               <rowConstraints>
-                  <RowConstraints maxHeight="46.0" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="121.0" minHeight="-Infinity" prefHeight="69.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="241.0" minHeight="-Infinity" prefHeight="69.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="125.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="125.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ListView fx:id="lstAvailableTimes" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" GridPane.rowSpan="2" />
-                  <ListView fx:id="lstChosenTimes" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="2" />
-                  <Label text="Available Times" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Label text="Chosen Times" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Button fx:id="btnAddTime" mnemonicParsing="false" text="Add Time" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <ListView fx:id="lstAvailableTimes" prefHeight="200.0" prefWidth="200.0" GridPane.rowSpan="2" />
+                  <ListView fx:id="lstChosenTimes" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowSpan="2" />
+                  <Label text="Available Times" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label text="Chosen Times" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnAddTime" mnemonicParsing="false" text="Add Time" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                      <GridPane.margin>
-                        <Insets />
+                        <Insets bottom="10.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="btnRemTime" mnemonicParsing="false" prefHeight="44.0" prefWidth="77.0" text="Remove Time" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                  <Button fx:id="btnRemTime" mnemonicParsing="false" prefHeight="42.0" prefWidth="74.0" text="Remove Time" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <GridPane.margin>
-                        <Insets />
+                        <Insets top="10.0" />
                      </GridPane.margin>
                   </Button>
-                  <Label layoutX="62.0" layoutY="27.0" text="Available Tasks" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                  <Label layoutX="367.0" layoutY="27.0" text="Chosen Tasks" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                  <ListView fx:id="lstAvailableTasks" layoutX="10.0" layoutY="34.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" GridPane.rowSpan="2" />
-                  <ListView fx:id="lstChosenTasks" layoutX="310.0" layoutY="34.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.rowSpan="2" />
-                  <Button fx:id="btnAddTask" layoutX="222.0" layoutY="51.0" mnemonicParsing="false" text="Add Task" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                  <Button fx:id="btnRemTask" layoutX="222.0" layoutY="98.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="77.0" text="Remove Task" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
+                  <Button fx:id="btnApprove" mnemonicParsing="false" text="Approve" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
                </children>
             </GridPane>
-            <Label text="Choose times that work for you and tasks you can complete" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <Label text="Choose times that work for you" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="5.0" />
                </GridPane.margin>
+               <font>
+                  <Font size="16.0" />
+               </font>
             </Label>
             <Button fx:id="btnCancel" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="RIGHT">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btnApprove" mnemonicParsing="false" text="Approve" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
    </children>

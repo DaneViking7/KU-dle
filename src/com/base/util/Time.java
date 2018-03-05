@@ -1,5 +1,6 @@
 package com.base.util;
 
+import com.base.main.CalendarUI;
 import com.base.data.models.User;
 
 import java.time.LocalTime;
@@ -72,6 +73,7 @@ public class Time {
 			{
 				if(attendees.get(i).equals(attendee))
 					return true;
+				
 			}
 		}
 		return false;
@@ -86,8 +88,12 @@ public class Time {
 	public boolean addAttendee(User attendee)
 	{
 		if(attendeeExists(attendee))
+		{
+			//System.out.print("false\n");
 			return false;
+		}
 		attendees.add(attendee);
+		//System.out.print("true\n");
 		return true;
 	}
 

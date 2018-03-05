@@ -52,7 +52,6 @@ import com.base.main.CreateEventUI;
 import com.base.main.CreateUserUI;
 
 import com.base.util.Time;
-import com.base.util.Task;
 import com.base.util.Utilities;
 
 
@@ -176,14 +175,13 @@ public class CalendarUI extends Application
 	@FXML private ListView<Event> lstViewAvailable; //Initialization of the ListView thats waiting for approval
 	@FXML private ListView<Event> lstViewAccepted; //Initialization of the ListView that is already accepted
 	@FXML private ListView<String> lstViewTimes; //Initialization of the ListView that is already accepted
-	@FXML private ListView<String> lstViewTasks;
 
 	// For displays
 	private String[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 	private String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
 	LocalDate currentDateLD = LocalDate.of(0, 1, 1); // LocalDate version of current date (To be used in interfacing with the client)
-	LocalDate selectedDateLD = LocalDate.of(0, 1, 1); // LocalDate version of selected date
+	static LocalDate selectedDateLD = LocalDate.of(0, 1, 1); // LocalDate version of selected date
 	private int[] currentDateArr = {0, 0, 0}; // (Month/Day/Year)
 	private int[] selectedDateArr = {0, 0, 0};
 	private int selDateRow = 0; // Row index of selected date
@@ -191,13 +189,13 @@ public class CalendarUI extends Application
 	static ArrayList<Pair<Integer, Integer>> multiDayArr = new ArrayList<Pair<Integer, Integer>>();
 	
 
-	private DairyFarmerClient client = new DairyFarmerClient();
+	static DairyFarmerClient client = new DairyFarmerClient();
 	private User user;
 
 	private String inputUsername;
 	private String inputPassword;
 	private boolean loginDetails = false;
-	static boolean multiDayMode;
+	public static boolean multiDayMode;
 
 	/**
 	 * Where the application launches from
@@ -500,7 +498,6 @@ public class CalendarUI extends Application
 			lstViewAccepted.getItems().removeAll(lstViewAccepted.getItems());
 			lstViewAvailable.getItems().removeAll(lstViewAvailable.getItems());
 			lstViewTimes.getItems().removeAll(lstViewTimes.getItems());
-			lstViewTasks.getItems().removeAll(lstViewTasks.getItems());
 			lblEventName.setText("");
 			lblEventDesc.setText("");
 
@@ -567,10 +564,8 @@ public class CalendarUI extends Application
 				{
 					lblEventName.setText(currentEvent.getEventName());
 					lblEventDesc.setText(currentEvent.getDescription());
-					lstViewTimes.getItems().removeAll(lstViewTimes.getItems());
-					lstViewTasks.getItems().removeAll(lstViewTasks.getItems());
+					lstViewTimes.getItems().removeAll(lstViewTimes.getItems());;
 					List<Time> listofTimes = currentEvent.getTimes();
-					List<Task> listofTasks = currentEvent.getTasks();
 
 					if(currentEvent!=null)
 					{
@@ -580,22 +575,16 @@ public class CalendarUI extends Application
 							temp = "";
 							temp += time.toString() + " :";
 							List<User> users = time.getAttendees();
+							/*for(User m : users)
+							{
+								System.out.print(m.getName());
+								System.out.print('\n');
+							}*/
 							for(User u : users)
 							{
 								temp += " " + u.getName();
 							}
 							lstViewTimes.getItems().add(temp);
-						}
-						for (Task task : listofTasks)
-						{
-							temp = "";
-							temp += task.toString() + " ";
-							if(task.getAttendee() != null)
-							{
-								User user = task.getAttendee();
-								temp += ": " + user.getName();
-							}
-							lstViewTasks.getItems().add(temp);
 						}
 					}
 					if(lstView.equals(lstViewAvailable))
@@ -743,9 +732,6 @@ public class CalendarUI extends Application
 	            	updateLists();
 	            	paneMain.setDisable(false);
 	            	Thread.currentThread().stop();
-	            	chckMultiDay.setSelected(false);
-	            	setMultiDayMode(false);
-	            	
 	            }
 	        }
 	    }, 0, 1, TimeUnit.SECONDS);
@@ -777,7 +763,7 @@ public class CalendarUI extends Application
 	}
 
 	/**
-	 * Opens the create event window
+	 * Opens the approve event window
 	 * @throws IOException In case CreateEventUI screws up
 	 * @throws InterruptedException For the thread
 	 */
@@ -797,7 +783,7 @@ public class CalendarUI extends Application
 	            	paneMain.setDisable(false);
 	            	Thread.currentThread().stop();
 	            }
-	        }
+	        }   
 	    }, 0, 1, TimeUnit.SECONDS);
 	}
 

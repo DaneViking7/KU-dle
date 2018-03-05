@@ -5,7 +5,6 @@ import com.base.data.interfaces.Users;
 import com.base.data.models.Event;
 import com.base.data.models.User;
 import com.base.util.Time;
-import com.base.util.Task;
 import com.fatboyindustrial.gsonjavatime.Converters;
 import com.google.gson.*;
 
@@ -137,14 +136,13 @@ public class DairyFarmerClient {
      * @param date LocalDate representing day of event
      * @param times List of times for event
      * @param attendees List of attendees for event
-     * @param tasks List of tasks for event
      * @return true if event was created
      * @see LocalDate
      * @see Time
      * @see List
      */
-    public boolean createEvent(String eventName, String description, String creatorName, LocalDate date, List<Time> times, List<User> attendees, List<Task> tasks) {
-        Event event = new Event(eventName, description, creatorName, date, times, attendees, tasks);
+    public boolean createEvent(String eventName, String description, String creatorName, LocalDate date, List<Time> times, List<User> attendees) {
+        Event event = new Event(eventName, description, creatorName, date, times, attendees);
 
         if (events.containsKey(date)) {
             events.get(date).add(event);
