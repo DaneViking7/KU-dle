@@ -78,7 +78,7 @@ public class CalendarUI extends Application
 	@FXML private TextArea lblEventDesc;
 
 	// Calendar boxes
-	private Label[][] calendarDateLabels = new Label[6][7];
+	private static Label[][] calendarDateLabels = new Label[6][7];
 	@FXML private Label lblDay56;
 	@FXML private Label lblDay55;
 	@FXML private Label lblDay54;
@@ -943,7 +943,7 @@ public class CalendarUI extends Application
 	 * @param y The year... Only useful if the month is February (for leap years)
 	 * @return The amount of days
 	 */
-	private int getAmtOfDays(int m, int y)
+	static int getAmtOfDays(int m, int y)
 	{
 		if(m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) // January, March,..., December
 			return 31;
@@ -1051,5 +1051,10 @@ public class CalendarUI extends Application
 		alert.setContentText(content);
 
 		alert.showAndWait();
+	}
+	
+	public static Label getCalendarDateLabel(Integer row, Integer day)
+	{
+		return calendarDateLabels[row][day];
 	}
 }
