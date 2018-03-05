@@ -20,7 +20,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;S
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
@@ -45,6 +46,7 @@ public class CreateEventUI
 	@FXML private Button btnAddTask;
 	@FXML private Button btnDelTask;
 	@FXML private Button btnCreate;
+	@FXML private CheckBox chckSameTimes;
 
 	private DairyFarmerClient client;
 	private User admin; // The user
@@ -158,11 +160,19 @@ public class CreateEventUI
 				
 				if(CalendarUI.multiDayMode)
 				{
-					for(int i = 1; i <= CalendarUI.multiDayArr.size(); i++)
-			    	{	
-			    		LocalDate tempMultiDayLD = currDate.plusDays(i);
-			    		client.createEvent(txtEventName.getText(), txtEventDesc.getText(), admin.getName(), tempMultiDayLD, tempTime, tempUser, tempTask);
-			    	}
+					if(chckSameTimes.isSelected())
+					{
+						for(int i = 1; i <= CalendarUI.multiDayArr.size(); i++)
+				    	{	
+				    		LocalDate tempMultiDayLD = currDate.plusDays(i);
+				    		client.createEvent(txtEventName.getText(), txtEventDesc.getText(), admin.getName(), tempMultiDayLD, tempTime, tempUser, tempTask);
+				    	}
+					}
+					else
+					{
+						
+						
+					}
 				}
 				
 				showDialogBox("Event Created", "Event Created!", "Event \"" + txtEventName.getText() + "\" was successfully created!", AlertType.INFORMATION);
