@@ -10,6 +10,7 @@ import com.base.data.DairyFarmerClient;
 import com.base.data.models.Event;
 import com.base.data.models.User;
 import com.base.util.Time;
+import com.base.util.Task;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,12 +34,16 @@ public class CreateEventUI
 	@FXML private TextField txtEventName;
 	@FXML private TextArea txtEventDesc;
 	@FXML private Label lblEventDesc;
+	@FXML private TextField txtTaskName;
 
 	@FXML private ListView<Time> lstPossibleTimes;
 	@FXML private ListView<Time> lstChosenTimes;
+	@FXML private ListView<Task> lstTaskList;
 
 	@FXML private Button btnAddTime;
 	@FXML private Button btnDelTime;
+	@FXML private Button btnAddTask;
+	@FXML private Button btnDelTask;
 	@FXML private Button btnCreate;
 
 	private DairyFarmerClient client;
@@ -64,6 +69,7 @@ public class CreateEventUI
 
 		lstPossibleTimes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); // Makes it so you can choose multiple times
 		lstChosenTimes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		lstTaskList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		lstPossibleTimes.getItems().addAll(getPossibleTimes());
 
 		// Start the application
@@ -114,6 +120,26 @@ public class CreateEventUI
             }
         	lstPossibleTimes.getItems().sort((Time t1, Time t2) -> t1.getTime().compareTo(t2.getTime()));
 		});
+		
+		// Adds the task to the event
+		btnAddTask.setOnAction(e ->
+		{
+			String temp = txtTaskName.getText();
+			Task newTask = new Task(temp, null);
+        	lstTaskList.getItems().add(newTask);
+		});
+		
+		// Deletes the task from the event
+		btnDelTask.setOnAction(e ->
+		{
+			ObservableList<Task> temp = lstTaskList.getSelectionModel().getSelectedItems();
+			Task[] selectedTasks = temp.toArray(new Task[0]);
+
+            for(Task task : selectedTasks)
+            {
+            	lstTaskList.getItems().remove(task);
+            }
+		});
 
 		// Creates the event
 		btnCreate.setOnAction(e ->
@@ -125,16 +151,17 @@ public class CreateEventUI
 				{
 					t.addAttendee(admin); // Adds an attendee to the times
 				}
+				List<Task> tempTask = lstTaskList.getItems();
 				List<User> tempUser = new ArrayList<User>(); // Necessary for the event creation
 				tempUser.add(admin);
-				client.createEvent(txtEventName.getText(), txtEventDesc.getText(), admin.getName(), currDate, tempTime, tempUser);
+				client.createEvent(txtEventName.getText(), txtEventDesc.getText(), admin.getName(), currDate, tempTime, tempUser, tempTask);
 				
 				if(CalendarUI.multiDayMode)
 				{
 					for(int i = 1; i <= CalendarUI.multiDayArr.size(); i++)
 			    	{	
 			    		LocalDate tempMultiDayLD = currDate.plusDays(i);
-			    		client.createEvent(txtEventName.getText(), txtEventDesc.getText(), admin.getName(), tempMultiDayLD, tempTime, tempUser);
+			    		client.createEvent(txtEventName.getText(), txtEventDesc.getText(), admin.getName(), tempMultiDayLD, tempTime, tempUser, tempTask);
 			    	}
 				}
 				

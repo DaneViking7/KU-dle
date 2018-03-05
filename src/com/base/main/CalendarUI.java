@@ -52,6 +52,7 @@ import com.base.main.CreateEventUI;
 import com.base.main.CreateUserUI;
 
 import com.base.util.Time;
+import com.base.util.Task;
 import com.base.util.Utilities;
 
 
@@ -175,6 +176,7 @@ public class CalendarUI extends Application
 	@FXML private ListView<Event> lstViewAvailable; //Initialization of the ListView thats waiting for approval
 	@FXML private ListView<Event> lstViewAccepted; //Initialization of the ListView that is already accepted
 	@FXML private ListView<String> lstViewTimes; //Initialization of the ListView that is already accepted
+	@FXML private ListView<String> lstViewTasks;
 
 	// For displays
 	private String[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
@@ -498,6 +500,7 @@ public class CalendarUI extends Application
 			lstViewAccepted.getItems().removeAll(lstViewAccepted.getItems());
 			lstViewAvailable.getItems().removeAll(lstViewAvailable.getItems());
 			lstViewTimes.getItems().removeAll(lstViewTimes.getItems());
+			lstViewTasks.getItems().removeAll(lstViewTasks.getItems());
 			lblEventName.setText("");
 			lblEventDesc.setText("");
 
@@ -564,8 +567,10 @@ public class CalendarUI extends Application
 				{
 					lblEventName.setText(currentEvent.getEventName());
 					lblEventDesc.setText(currentEvent.getDescription());
-					lstViewTimes.getItems().removeAll(lstViewTimes.getItems());;
+					lstViewTimes.getItems().removeAll(lstViewTimes.getItems());
+					lstViewTasks.getItems().removeAll(lstViewTasks.getItems());
 					List<Time> listofTimes = currentEvent.getTimes();
+					List<Task> listofTasks = currentEvent.getTasks();
 
 					if(currentEvent!=null)
 					{
@@ -580,6 +585,17 @@ public class CalendarUI extends Application
 								temp += " " + u.getName();
 							}
 							lstViewTimes.getItems().add(temp);
+						}
+						for (Task task : listofTasks)
+						{
+							temp = "";
+							temp += task.toString() + " ";
+							if(task.getAttendee() != null)
+							{
+								User user = task.getAttendee();
+								temp += ": " + user.getName();
+							}
+							lstViewTasks.getItems().add(temp);
 						}
 					}
 					if(lstView.equals(lstViewAvailable))

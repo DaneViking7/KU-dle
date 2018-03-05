@@ -1,12 +1,14 @@
 package com.base.data.models;
 
 import com.base.util.Time;
+import com.base.util.Task;
 
 import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Event object: contains event name, creator name, date, and list of times
+ * Event object: contains event name, creator name, date, list of times, list of attendees
+ * and list of tasks.
  */
 public class Event {
     private String eventName;
@@ -15,6 +17,7 @@ public class Event {
     private LocalDate date;
     private List<Time> times;
     private List<User> attendees;
+    private List<Task> tasks;
 
     /**
      * Creates an event with the specified values
@@ -25,17 +28,19 @@ public class Event {
      * @param date LocalDate representing event's date
      * @param times List of times for event
      * @param attendees List of attendees for event
+     * @param tasks List of tasks for event
      * @see LocalDate
      * @see Time
      * @see List
      */
-    public Event(String eventName, String description, String creatorName, LocalDate date, List<Time> times, List<User> attendees) {
+    public Event(String eventName, String description, String creatorName, LocalDate date, List<Time> times, List<User> attendees, List<Task> tasks) {
         this.eventName = eventName;
         this.description = description;
         this.creatorName = creatorName;
         this.date = date;
         this.times = times;
         this.setAttendees(attendees);
+        this.tasks = tasks;
     }
 
     /**
@@ -135,6 +140,28 @@ public class Event {
 		this.attendees = attendees;
 	}
 
+    /**
+     * Returns the list of tasks for the event
+     *
+     * @return list of Tasks
+     * @see Task
+     * @see List
+     */
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    /**
+     * Re-assigns the member variable tasks
+     *
+     * @param tasks A valid list of tasks for an event
+     * @see Task
+     * @see List
+     */
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+	
 	/**
 	 * Checks to see if the user is already attending
 	 *
