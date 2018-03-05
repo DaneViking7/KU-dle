@@ -78,49 +78,49 @@ public class CalendarUI extends Application
 	@FXML private TextArea lblEventDesc;
 
 	// Calendar boxes
-	private Label[][] calendarDateLabels = new Label[6][7];
-	@FXML private Label lblDay56;
-	@FXML private Label lblDay55;
-	@FXML private Label lblDay54;
-	@FXML private Label lblDay53;
-	@FXML private Label lblDay52;
-	@FXML private Label lblDay51;
-	@FXML private Label lblDay50;
-	@FXML private Label lblDay46;
-	@FXML private Label lblDay45;
-	@FXML private Label lblDay44;
-	@FXML private Label lblDay43;
-	@FXML private Label lblDay42;
-	@FXML private Label lblDay41;
-	@FXML private Label lblDay40;
-	@FXML private Label lblDay36;
-	@FXML private Label lblDay35;
-	@FXML private Label lblDay34;
-	@FXML private Label lblDay33;
-	@FXML private Label lblDay32;
-	@FXML private Label lblDay31;
-	@FXML private Label lblDay30;
-	@FXML private Label lblDay26;
-	@FXML private Label lblDay25;
-	@FXML private Label lblDay24;
-	@FXML private Label lblDay23;
-	@FXML private Label lblDay22;
-	@FXML private Label lblDay21;
-	@FXML private Label lblDay20;
-	@FXML private Label lblDay16;
-	@FXML private Label lblDay15;
-	@FXML private Label lblDay14;
-	@FXML private Label lblDay13;
-	@FXML private Label lblDay12;
-	@FXML private Label lblDay11;
-	@FXML private Label lblDay10;
-	@FXML private Label lblDay06;
-	@FXML private Label lblDay05;
-	@FXML private Label lblDay04;
-	@FXML private Label lblDay03;
-	@FXML private Label lblDay02;
-	@FXML private Label lblDay01;
-	@FXML private Label lblDay00;
+	static Label[][] calendarDateLabels = new Label[6][7];
+	@FXML static Label lblDay56;
+	@FXML static Label lblDay55;
+	@FXML static Label lblDay54;
+	@FXML static Label lblDay53;
+	@FXML static Label lblDay52;
+	@FXML static Label lblDay51;
+	@FXML static Label lblDay50;
+	@FXML static Label lblDay46;
+	@FXML static Label lblDay45;
+	@FXML static Label lblDay44;
+	@FXML static Label lblDay43;
+	@FXML static Label lblDay42;
+	@FXML static Label lblDay41;
+	@FXML static Label lblDay40;
+	@FXML static Label lblDay36;
+	@FXML static Label lblDay35;
+	@FXML static Label lblDay34;
+	@FXML static Label lblDay33;
+	@FXML static Label lblDay32;
+	@FXML static Label lblDay31;
+	@FXML static Label lblDay30;
+	@FXML static Label lblDay26;
+	@FXML static Label lblDay25;
+	@FXML static Label lblDay24;
+	@FXML static Label lblDay23;
+	@FXML static Label lblDay22;
+	@FXML static Label lblDay21;
+	@FXML static Label lblDay20;
+	@FXML static Label lblDay16;
+	@FXML static Label lblDay15;
+	@FXML static Label lblDay14;
+	@FXML static Label lblDay13;
+	@FXML static Label lblDay12;
+	@FXML static Label lblDay11;
+	@FXML static Label lblDay10;
+	@FXML static Label lblDay06;
+	@FXML static Label lblDay05;
+	@FXML static Label lblDay04;
+	@FXML static Label lblDay03;
+	@FXML static Label lblDay02;
+	@FXML static Label lblDay01;
+	@FXML static Label lblDay00;
 
 	private Rectangle[][] calendarDateBoxes = new Rectangle[6][7];
 	@FXML private Rectangle boxDay56;
@@ -943,7 +943,7 @@ public class CalendarUI extends Application
 	 * @param y The year... Only useful if the month is February (for leap years)
 	 * @return The amount of days
 	 */
-	private int getAmtOfDays(int m, int y)
+	static int getAmtOfDays(int m, int y)
 	{
 		if(m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) // January, March,..., December
 			return 31;

@@ -21,7 +21,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;S
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
@@ -51,6 +51,7 @@ public class CreateEventUI
 	private DairyFarmerClient client;
 	private User admin; // The user
 	private LocalDate currDate; // The current date
+	private int[] selectedDateArrCE = {0, 0, 0}; //year, month, day
 
 	private boolean eventCreated = false; // Will tell whether or not the event is created
 
@@ -162,10 +163,36 @@ public class CreateEventUI
 				{
 					if(chckSameTimes.isSelected())
 					{
-						for(int i = 1; i <= CalendarUI.multiDayArr.size(); i++)
+						for(int i = 0; i < CalendarUI.multiDayArr.size(); i++)
 				    	{	
-				    		LocalDate tempMultiDayLD = currDate.plusDays(i);
-				    		client.createEvent(txtEventName.getText(), txtEventDesc.getText(), admin.getName(), tempMultiDayLD, tempTime, tempUser, tempTask);
+				    		//Extract the row and day from CalendarUI.multiDayArr
+							Integer row = CalendarUI.multiDayArr.get(i).getKey();
+				    		Integer day = CalendarUI.multiDayArr.get(i).getValue();
+				    		
+				    		selectedDateArrCE[2] = Integer.parseInt(CalendarUI.calendarDateLabels[row][day].getText()); // Get day of event
+				    		selectedDateArrCE[1] = currDate.getMonthValue(); //get month
+				    		selectedDateArrCE[0] = currDate.getYear(); //get year
+				    		
+				    		//account for end of month
+				    		if(selectedDateArrCE[2] > CalendarUI.getAmtOfDays(selectedDateArrCE[1], selectedDateArrCE[0])) 
+				    		{
+				    			selectedDateArrCE[2] = 1;
+				    			//TODO: add additional code here to account for more than one day after the end of a month
+				    			//likely be implemented with a counter of some sort
+				    		}
+				    		
+				    		//account for end of year/end of month
+				    		if((selectedDateArrCE[2] > CalendarUI.getAmtOfDays(selectedDateArrCE[1], selectedDateArrCE[0])) && selectedDateArrCE[1] == 12 )
+				    		{
+				    			selectedDateArrCE[1] = 1;
+				    			selectedDateArrCE[0] = selectedDateArrCE[0] + 1;
+				    		}
+				    		
+				    		//create local date object for clientCreateEvent
+							LocalDate tempMultiDayLD = LocalDate.of(selectedDateArrCE[0], selectedDateArrCE[1], selectedDateArrCE[2]);
+				    		
+							//create the event
+							client.createEvent(txtEventName.getText(), txtEventDesc.getText(), admin.getName(), tempMultiDayLD, tempTime, tempUser, tempTask);
 				    	}
 					}
 					else
