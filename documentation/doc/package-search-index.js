@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"com.base.data"},{"l":"com.base.data.interfaces"},{"l":"com.base.data.models"},{"l":"com.base.main"},{"l":"com.base.util"}]
