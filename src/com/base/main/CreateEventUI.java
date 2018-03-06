@@ -157,9 +157,11 @@ public class CreateEventUI
 				List<Task> tempTask = lstTaskList.getItems();
 				List<User> tempUser = new ArrayList<User>(); // Necessary for the event creation
 				tempUser.add(admin);
-				client.createEvent(txtEventName.getText(), txtEventDesc.getText(), admin.getName(), currDate, tempTime, tempUser, tempTask);
-				
-				if(CalendarUI.multiDayMode)
+				if(!CalendarUI.multiDayMode)
+				{
+					client.createEvent(txtEventName.getText(), txtEventDesc.getText(), admin.getName(), currDate, tempTime, tempUser, tempTask);
+				}
+				else
 				{
 					if(chckSameTimes.isSelected())
 					{
@@ -201,7 +203,6 @@ public class CreateEventUI
 						
 					}
 				}
-				
 				showDialogBox("Event Created", "Event Created!", "Event \"" + txtEventName.getText() + "\" was successfully created!", AlertType.INFORMATION);
 				eventCreated = true;
 				stage.close();
