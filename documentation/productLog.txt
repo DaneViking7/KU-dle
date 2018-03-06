@@ -1,0 +1,45 @@
+Product Backlog
+	- complexity is done on a fibonacci scale for increased accuracy of estimation
+	- time is determined by how long coding/implementation would actually take, it does not take into account learning how existing functionalities work and learning/researching elements of languages unknown to us
+
+Section: Multi-day Scheduling
+  Item Descriptions:
+	1. event creation allows the option to schedule times across multiple days
+		Complexity estimation: 89
+		Time needed to complete: 3 hours
+	2. event creator is allowed the option to copy the times that were selected for one day and copy all those times to another day
+		Complexity estimation: 55
+		Time needed to complete: 3.5 hours
+	3. able to go into mode by clicking to check a checkbox 
+		Complexity estimation: 1
+		Time needed to complete: 15 minutes
+
+Section: Task List
+  Items Descriptions:
+	4. creator of an event is able to add a task list to an event
+		Complexity estimation: 34
+		Time needed to complete: 2 hours
+	5. creator is able to see that tasks have been added to an event beneath times they have chosen
+		Complexity estimation: 5
+		Time needed to complete: 45 hour
+	6. all event attendees are able to sign up for zero or more tasks
+		Complexity estimation: 21
+		Time needed to complete: 1.5 hours
+
+Section: Event Creator View
+  Items Descriptions:
+	7. creator of an event is able to quickly see who can attend, at what time they can attend, and who is taking responsibility for each task if any have chosen to
+		Complexity estimation: 8
+		Time needed to complete: 45 minutes
+
+Section: Event Attendee View
+  Items Descriptions:
+	8. event attendees are able to list all times that they are available and can sign up to take on responsibilities for event tasks
+		Complexity estimation: 13
+		Time needed to complete: 1 hour
+	9. attendees are allowed to sign up for as many tasks as they wish
+		Complexity estimation: 3
+		Time needed to complete: 20 minutes
+	10. multiple attendees are not allowed to sign up for the same task, attendees are not even able to see or select tasks that have already been taken
+		Complexity estimation: 2
+		Time needed to complete: 30 minutes

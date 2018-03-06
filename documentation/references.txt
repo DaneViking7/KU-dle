@@ -1,25 +1,42 @@
 References:
  : Main program
+ * This project is based off of Team 4's Project 1
+	- https://github.com/justinro-underscore/KU-dle
+	- all of the files besides Task.java are built upon pre-existing files
+
+ : Dependencies
  * gson by Google
 	- https://github.com/google/gson
+	- https://mvnrepository.com/artifact/com.google.code.gson/gson/2.8.2
 	- used for serializing and deserializing json data
 	- used in DairyFarmerClient.java
  * gson-javatime-serialisers by gkopff
 	- https://github.com/gkopff/gson-javatime-serialisers
+	- https://mvnrepository.com/artifact/com.fatboyindustrial.gson-javatime-serialisers/gson-javatime-serialisers/1.1.1
 	- used for serializing and deserializing Java's LocalData and LocalTime
 	- used in DairyFarmerClient.java
  * e(fx)clipse by eclipse
 	- https://www.eclipse.org/efxclipse/install.html
 	- UI library for design elements
-	- used in CallenderUI.fxml
+	- used in CalendarUI.fxml
 	- used in CreateEventUI.fxml
  * scenebuilder by gluon
 	- http://gluonhq.com/products/scene-builder/
 	- UI for utilizing e(fx)clipse
-	- used in CallenderUI.fxml
+	- used in CalendarUI.fxml
 	- used in CreateEventUI.fxml
 
- : Testing branch
+ : Java Classes and Objects research
+ * ArrayList information reference
+	- https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html
+ * CheckBox information reference
+	- https://docs.oracle.com/javafx/2/api/javafx/scene/control/CheckBox.html#setSelected(boolean)
+ * List reference
+	- https://docs.oracle.com/javase/8/docs/api/java/util/List.html
+ * Pairs reference
+	- http://www.baeldung.com/java-pairs
+
+ : Testing branch for Project 1 material
  * JUnit 4/5
     - https://junit.org/junit4/
     - used for unit test cases

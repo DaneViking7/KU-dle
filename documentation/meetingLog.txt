@@ -1,0 +1,98 @@
+2-19-18
+ - asked Team 4 members which applications they used for creating their software
+ - for development they used: Eclipse, Scenebuilder, and Java Development Kit (JDK)
+
+2-21-18
+ - meeting began at 8:30 am in classroom, then moved to study room in LEEP2
+ - team members there: Natalie, Annika, and Niels
+ - Dividing of tasks:
+	- Natalie: fix received program so that no events can be in the past, add ability to pick times across multiple days
+	- Aldin: add ability to copy times to another day
+	- Annika: add ability for allowing attendees to signup for tasks but only one attendee per task
+	- Niels: add ability for adding tasks to admin mode and allowing admin to see who signs up for tasks
+ - meeting adjourned at 8:48 am
+ - Annika has begun taking notes over meetings
+ - information about task delegation was pushed to the group message for future reference and to inform missing team member
+
+2-23-18
+ - meeting began at 9:00 am in study room in LEEP2
+ - team members there: Natalie, Annika, Niels, and Aldin
+ - Notes:
+	- all team members are aware of their responsibilities
+	- everyone needs to have downloaded Eclipse, Scenebuilder, and JDK by the time we meet again
+	- make sure you can open the project and know how to edit the files using the applications
+	- absolutely begin working on your tasks for the project asap
+	- Annika has created a product backlog with adjustments made by group members for their tasks
+ - meeting adjourned at 9:45 am
+
+2-23-18
+ - asked Team 4 members about ability to change project window view
+ - team had not added ability to change project window size for other screen sizes
+
+2-26-18
+ - meeting began at 8:35 am in classroom then moved to study room in LEEP2
+ - team members there: Natalie, Annika, Niels, and Aldin
+ - Tasks:
+	- Aldin: get your new computer asap and set up the applications on it
+	- Natalie: get the applications downloaded
+	- Niels: got the applications downloaded during the meeting, start working on resizing window
+	- Annika: try to figure out how to get the application working within the eclipse application since you have the applications downloaded and how files work
+ - meeting adjourned at 9:45 am
+
+2-26-18
+ - asked Team 4 members about gson files that we need to download
+ - their github links to gson files needed were incorrect and that is why the application was not working when Annika tried to run it
+ - gson files that need to be downloaded from Maven
+	- gson 2.8.2
+	- gson javatime serialiser 1.1.1
+
+2-28-18
+ - meeting began at 8:50 am in study room in LEEP2
+ - Tasks:
+	- Niels: got the window resize working, has already started working on tasks since everything is running now
+	- Annika: has already started working on tasks since everything is running now
+	- Natalie: gson has been added to project build path, start working on your section now that everything is running
+	- Aldin: please get your computer from the mail office and set it up, wrote down every single step for configuring build path
+ - meeting adjourned at 9:50 am
+
+3-1-18
+ - meeting began at 12:30 pm in laboratory room in Eaton
+ - meeting is being used partially as lab section and as project meeting time
+ - Tasks:
+	- Niels: keep working on your tasks, Task.java is looking good; be careful about merge conflicts
+	- Annika: keep working on your tasks, AcceptEvent is looking good; be careful about merge conflicts
+	- Natalie: keep working on your tasks, AcceptEvent is looking good; be careful about merge conflicts
+	- Aldin: downloaded software and configured build path during meeting, need to get started on your tasks
+ - Aldin left at 1:05 pm with the intention to figure out lab and project by himself at home
+ - meeting was adjourned at 3:00 pm
+
+3-3-18
+ - group meeting held impromptu over text
+ - Aldin has texted saying that he is dropping out of the class and will not be working on his section of the project any longer
+ - the rest of the group will not be getting any code from his section unfortunately
+ - group of three reassembles at this news and edits modes of communication
+ - Niels has been elected to send Bardas and Kurt an email about team member leaving
+ - group members will complete their sections tonight and regroup 3-4-18 to determine what to do with Aldin's section
+
+3-4-18 
+ - meeting held over text
+ - Niels and Annika have finished their sections of the project as of this afternoon
+ - Natalie has finished her section up to group specifications with one bug
+ - group had realization that one of the requirements sections was misunderstood
+ - Aldin's part has been partially done by Natalie accidentally, now just need to restructure her work so that it completes both Natalie and Aldin's section
+ - Annika has begun working on typing up the paper copy of meeting notes
+
+3-5-18
+ - meeting began at 8:53am in study room in LEEP2
+ - group determines how to restructure the project
+ - Natalie and Niels begin working on the additions to CreateEventUI.java and CalendarUI.java
+ - Annika has completed the meeting log, has started typing up the paper copy of the product backlog, and is halfway done with the presentation slides and presentation speaking write-up
+ - meeting adjourned at 9:58am
+
+3-5-18
+ - meeting held over google hangout
+ - group has made decisions to terminate work on functionalities that are not required but were originally part of the plan for the project
+ - Project has been completed
+ - documentation has been run and added
+ - references, meeting log, and README have been edited and added for upload
+ - meeting log will be added for upload and project will be pushed to GitHub after this final statement
