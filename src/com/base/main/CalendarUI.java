@@ -729,7 +729,8 @@ public class CalendarUI extends Application
 		// Turns on/off multi-day events
 		chckMultiDay.setOnAction(e ->
 		{
-			setMultiDayMode(chckMultiDay.isSelected());
+			if(user.getAdmin())
+				setMultiDayMode(chckMultiDay.isSelected());
 		});
 	}
 	
